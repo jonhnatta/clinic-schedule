@@ -13,18 +13,13 @@ import {
 } from "@/components/ui/sidebar";
 
 import {
-  Calendar,
   CalendarDays,
   Gem,
-  Home,
-  Inbox,
   LayoutDashboard,
-  Search,
-  Settings,
-  SquareActivity,
   Stethoscope,
   UsersRound,
   LogOut,
+  Hospital,
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -34,7 +29,6 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
 import { usePathname, useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import { Avatar } from "@/components/ui/avatar";
@@ -98,7 +92,7 @@ const AppSidebar = () => {
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
+                  <SidebarMenuButton asChild isActive={pathname === item.url}>
                     <Link href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
@@ -114,7 +108,7 @@ const AppSidebar = () => {
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem key="Planos">
-                <SidebarMenuButton asChild>
+                <SidebarMenuButton asChild isActive={pathname === "/plans"}>
                   <Link href="/plans">
                     <Gem />
                     <span>Planos</span>
@@ -125,14 +119,16 @@ const AppSidebar = () => {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter>
+      <SidebarFooter className="border-t">
         <SidebarMenu>
           <SidebarMenuItem>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <SidebarMenuButton size="lg">
                   <Avatar>
-                    <AvatarFallback></AvatarFallback>
+                    <AvatarFallback className="flex items-center justify-center">
+                      <Hospital />
+                    </AvatarFallback>
                   </Avatar>
                   <div>
                     <p className="text-sm">
