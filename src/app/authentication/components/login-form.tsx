@@ -1,4 +1,5 @@
 "use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -59,6 +60,7 @@ const LoginForm = () => {
         },
         onError: (error) => {
           toast.error("E-mail ou senha inválidos");
+          console.error("Login error:", error);
         },
       },
     );

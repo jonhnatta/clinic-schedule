@@ -25,7 +25,8 @@ const clinicFormSchema = z.object({
 });
 
 const ClinicForm = () => {
-  const form = useForm<z.infer<typeof clinicFormSchema>>({
+  
+    const form = useForm<z.infer<typeof clinicFormSchema>>({
     resolver: zodResolver(clinicFormSchema),
     defaultValues: {
       name: "",
