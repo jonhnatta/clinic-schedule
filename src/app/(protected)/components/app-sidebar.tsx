@@ -20,6 +20,7 @@ import {
   UsersRound,
   LogOut,
   Hospital,
+  EllipsisVertical,
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -124,7 +125,7 @@ const AppSidebar = () => {
           <SidebarMenuItem>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <SidebarMenuButton size="lg">
+                <SidebarMenuButton size="lg" className="justify-between">
                   <Avatar>
                     <AvatarFallback className="flex items-center justify-center">
                       <Hospital />
@@ -138,6 +139,7 @@ const AppSidebar = () => {
                       {session.data?.user.email}
                     </p>
                   </div>
+                  <EllipsisVertical />
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
