@@ -1,7 +1,29 @@
 "use client";
+
+import {
+  CalendarDays,
+  Diamond,
+  Gem,
+  LayoutDashboard,
+  LogOut,
+  Stethoscope,
+  UsersRound,
+} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -9,31 +31,8 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarFooter,
 } from "@/components/ui/sidebar";
-
-import {
-  CalendarDays,
-  Gem,
-  LayoutDashboard,
-  Stethoscope,
-  UsersRound,
-  LogOut,
-  Hospital,
-  EllipsisVertical,
-} from "lucide-react";
-import Link from "next/link";
-import Image from "next/image";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
-import { usePathname, useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
-import { Avatar } from "@/components/ui/avatar";
-import { AvatarFallback } from "@radix-ui/react-avatar";
 
 const items = [
   {
@@ -58,7 +57,7 @@ const items = [
   },
 ];
 
-const AppSidebar = () => {
+export function AppSidebar() {
   const router = useRouter();
   const session = authClient.useSession();
   const pathname = usePathname();
@@ -72,19 +71,10 @@ const AppSidebar = () => {
       },
     });
   };
-
   return (
     <Sidebar>
-      <SidebarHeader className="border-b">
-        <div className="flex w-full items-center justify-center gap-x-2 p-4">
-          <Image
-            src="/logomarca.svg"
-            alt="Clinic Schedule"
-            width={30}
-            height={30}
-          />
-          <h1 className="text-lg font-semibold">Clinic Schedule</h1>
-        </div>
+      <SidebarHeader className="border-b p-4">
+        <Image src="/logo.svg" alt="Doutor Agenda" width={136} height={28} />
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
@@ -108,11 +98,14 @@ const AppSidebar = () => {
           <SidebarGroupLabel>Outros</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              <SidebarMenuItem key="Planos">
-                <SidebarMenuButton asChild isActive={pathname === "/plans"}>
-                  <Link href="/plans">
+              <SidebarMenuItem>
+                <SidebarMenuButton
+                  asChild
+                  isActive={pathname === "/subscription"}
+                >
+                  <Link href="/subscription">
                     <Gem />
-                    <span>Planos</span>
+                    <span>Assinatura</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -120,16 +113,14 @@ const AppSidebar = () => {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter className="border-t">
+      <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <SidebarMenuButton size="lg" className="justify-between">
+                <SidebarMenuButton size="lg">
                   <Avatar>
-                    <AvatarFallback className="flex items-center justify-center">
-                      <Hospital />
-                    </AvatarFallback>
+                    <AvatarFallback>F</AvatarFallback>
                   </Avatar>
                   <div>
                     <p className="text-sm">
@@ -139,7 +130,6 @@ const AppSidebar = () => {
                       {session.data?.user.email}
                     </p>
                   </div>
-                  <EllipsisVertical />
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
@@ -154,6 +144,4 @@ const AppSidebar = () => {
       </SidebarFooter>
     </Sidebar>
   );
-};
-
-export default AppSidebar;
+}
