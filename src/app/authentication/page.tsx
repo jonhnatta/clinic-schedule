@@ -9,9 +9,9 @@ const AuthenticationPage = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
-  if (session?.user) {
-    redirect("/dashboard");
-  }
+  // if (session?.user) {
+  //   redirect("/dashboard");
+  // }
   return (
     <div className="flex h-screen flex-col items-center justify-center bg-gray-100">
       <Tabs defaultValue="login" className="w-[400px]">
